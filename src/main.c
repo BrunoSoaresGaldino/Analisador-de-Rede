@@ -54,7 +54,7 @@ int main(int argc ,char** argv)
     
     BITMAP *buffer_hold = create_bitmap(SCREEN_W,SCREEN_H);
     
-    BITMAP *arrow = load_bitmap("../assets/arrow.bmp",NULL);
+    BITMAP *arrow = load_bitmap("../images/arrow.bmp",NULL);
     
     if ( !arrow )
     {
@@ -116,6 +116,7 @@ int main(int argc ,char** argv)
         
         clear_to_color( buffer , WHITE );
        
+        rest(1);
         
     }
     
