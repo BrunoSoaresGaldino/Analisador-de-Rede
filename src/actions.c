@@ -10,9 +10,9 @@ void RemoveNodeRandomly(Network *network)
     
     srand((unsigned)time(NULL));
     
-    int rand_number = rand() % ( network->number_of_nodes);
+    int rand_number = rand() % ( network->number_of_nodes );
     
-    DestroyNode(network,rand_number);
+    DestroyNode( network , rand_number );
     
 }
 
@@ -20,27 +20,27 @@ void RemoveNodeRandomly(Network *network)
 
 void RemoveArcRandomly(Network *network)
 {
-    if( !network->number_of_arcs)
+    if( !network->number_of_arcs )
         return;
     
     srand((unsigned) time(NULL));
     
-    int rand_number = rand() % ( network->number_of_arcs);
+    int rand_number = rand() % ( network->number_of_arcs );
     
-    DestroyArc(network,rand_number);
+    DestroyArc( network , rand_number );
     
 }
 
 
 
-void RemoveN_NodesRandomly(Network * network,float n)
+void RemoveN_NodesRandomly( Network * network , float n )
 {
     
     int nodes_to_remove = 0;
     int i = 0;
     int rand_number;
     
-    if( n > 0.0f && n < 1.1f )// trata n percentual de nos a serem removidos
+    if( n > 0.0f && n < 1.1f )// trata n como o percentual de nos a serem removidos
     {
         
         nodes_to_remove = network->number_of_nodes * n;
@@ -56,12 +56,12 @@ void RemoveN_NodesRandomly(Network * network,float n)
     
     srand( (unsigned)time(NULL));
     
-    while( i < nodes_to_remove)
+    while( i < nodes_to_remove && network->number_of_nodes )
     {
         
         rand_number = rand() %  network->number_of_nodes;
         
-        DestroyNode(network,rand_number);
+        DestroyNode( network , rand_number );
         
         i++;
     }
@@ -94,7 +94,7 @@ void RemoveN_ArcsRandomly(Network * network,float n)
     
     srand( (unsigned)time(NULL));
     
-    while( i < arcs_to_remove)
+    while( i < arcs_to_remove && network->number_of_arcs )
     {
         
         rand_number = rand() %  network->number_of_arcs;
@@ -107,12 +107,14 @@ void RemoveN_ArcsRandomly(Network * network,float n)
 }
 
 
-
 void VisitNodes(Network *network)
 {
     
+
     bool visited_nodes[network->number_of_nodes]; 
+    
     int *matrix = GetAdjacenceMatrix(network);
+    
     int i;
     
     for(i = 0 ; i < network->number_of_nodes; i++)
@@ -133,86 +135,15 @@ void VisitNodes(Network *network)
     }
     
     FreeAdjacenceMatrix(matrix);
+    
+   
 }
-
-
-
-bool UserInput( Network **network, Network **copy)
-{
-    
-    if(key[KEY_N])
-    {
-        RemoveNodeRandomly(*network);
-        
-        key[KEY_N]  = 0;
-        
-        return false;
-    }   
-    
-    if(key[KEY_A])
-    {
-       
-        RemoveArcRandomly(*network);
-        
-        key[KEY_A]  = 0;
-        
-        return false;
-    }
-    
-    if( key[KEY_C] )
-    {
-        
-        DestroyNetwork(*copy);
-        
-        *copy = CopyNetwork(*network);
-        
-        if( !(*copy) )
-        {
-            allegro_message("Nao foi possivel copiar a rede");
-            
-        }
-        
-        key[KEY_C] = 0;
-        
-        return false;
-        
-    }
-    
-    if( key[KEY_R] )
-    {
-    
-        DestroyNetwork(*network);
-        
-        *network = CopyNetwork(*copy);
-            
-        if( !(*network) )
-        {
-            allegro_message("Nao foi possivel restaurar a rede");
-        
-        }
-        
-        key[KEY_R] = 0 ;
-        
-        return false;
-        
-    }
-    
-    if(key[KEY_ESC])
-    {
-       
-        return true;
-    }
-    
-}
-
 
 
 void SaveStats(Network *network, const char *file_name,float percent)
 {
-    
-    static bool first_call = true;
-    
-    
+   
+     
     FILE *file = fopen(file_name,"a");
     
     if( !file )
@@ -236,16 +167,16 @@ void SaveStats(Network *network, const char *file_name,float percent)
     }
     
     
-    if( first_call )
+    if ( GetFileSize(file) == 0)
     {
         fprintf(file,"%%,     Nos,    Arcos,  Usinas,  Componentes,  Componentes ^ -1,   Maior Componente,   Nos desconectados,\n");
-        first_call = false;
+
     }
     
         fprintf(
                 file,
                 "%3d,   %4d,   %4d,     %3d,     %4d,           %0.2f,               %4d,                %4d,\n",
-                (int)(percent*100),
+                (int)(percent*100.0),
                 network->number_of_nodes,
                 network->number_of_arcs,
                 network->number_of_generation_units,
@@ -266,7 +197,7 @@ void MakeEnsemble(Network **network,float ensemble_from, float ensemble_to, cons
     float i;
     Network *copy = NULL;
     
-    for( i = ensemble_from ; i <= ensemble_to ; i += 0.01)
+    for( i = ensemble_from ; i <= ensemble_to ; i += 0.01 )
     {
     
         DestroyNetwork(copy);
@@ -279,19 +210,173 @@ void MakeEnsemble(Network **network,float ensemble_from, float ensemble_to, cons
             return;
         }
         
-        RemoveN_ArcsRandomly(copy,i);
+        RemoveN_ArcsRandomly( copy , i );
         
-        VisitNodes(copy);
+        VisitNodes( copy );
         
         SaveStats(copy,out_file,i);
         
     }
     
-    if( copy )
+   
+}
+
+void RemoveNodeOnClick( Network *network,int mouse_state,float mouse_x , float mouse_y )
+{
+    if( mouse_state == 1)
     {
-        DestroyNetwork( *network );
-    
-        *network = CopyNetwork(copy);
+       
+        int i;
+        
+        for( i = 0 ; i < network->number_of_nodes ; i++ )
+        {
+            
+            if ( 
+                    
+                    ( abs( mouse_x - ( network->nodes[i]->pos_x *(SCREEN_WIDTH - DRAW_START )+ DRAW_START ) ) <= NODE_RADIUS  ) 
+                    && 
+                    ( abs( mouse_y - ( network->nodes[i]->pos_y *(SCREEN_HEIGHT) ) ) ) <= NODE_RADIUS  
+                
+                ) 
+                {
+                    
+                    DestroyNode( network , i );
+                    return;
+                }
+        }
+        
+        
+        
     }
     
+}
+
+void ShowNodeNameOnClick( Network *network,int mouse_state,float mouse_x , float mouse_y , BITMAP *buffer)
+{
+    if( mouse_state == 2 )
+    {
+       
+        int i;
+        
+        for( i = 0 ; i < network->number_of_nodes ; i++ )
+        {
+            
+            if ( 
+                    
+                    ( abs( mouse_x - ( network->nodes[i]->pos_x *(SCREEN_WIDTH - DRAW_START )+ DRAW_START ) ) <= NODE_RADIUS  ) 
+                    && 
+                    ( abs( mouse_y - ( network->nodes[i]->pos_y *(SCREEN_HEIGHT) ) ) ) <= NODE_RADIUS  
+                
+                ) 
+                {
+                    
+                    textprintf_ex( buffer , font ,0,SCREEN_HEIGHT-12,RED,-1,"%s",network->nodes[i]->name );
+                    
+                    return;
+                }
+        }
+        
+        
+        
+    }
+    
+}
+
+
+bool UserInput( Network **network , Network **copy , BITMAP *buffer )
+{
+    
+    if(key[KEY_N])
+    {
+        RemoveNodeRandomly(*network);
+
+        key[KEY_N] = 0;
+        
+        return false;
+    }   
+    
+    if(key[KEY_A])
+    {
+       
+        RemoveArcRandomly(*network);
+        
+        key[KEY_A] = 0;
+        
+        return false;
+    }
+    
+    if( key[KEY_C] )
+    {
+        
+        DestroyNetwork( *copy );
+        
+        *copy = CopyNetwork( *network );
+        
+        if( !(*copy) )
+        {
+            allegro_message("Nao foi possivel copiar a rede");
+            
+        }
+       
+        key[KEY_C] = 0;
+        
+        return false;
+        
+    }
+    
+    if( key[KEY_R] )
+    {
+    
+        DestroyNetwork( *network );
+        
+        *network = CopyNetwork(*copy);
+            
+        if( !( *network ) )
+        {
+            allegro_message("Nao foi possivel restaurar a rede");
+        
+        }
+        
+        key[KEY_R] = 0;
+        
+        return false;
+        
+    }
+    
+    if( key[KEY_P])
+    {
+        static int i = 1;
+        
+        char file_name[50];
+        
+        sprintf(file_name,"../images/screenshot%05d.bmp",i++);
+        
+        save_bitmap(file_name,buffer,NULL);
+        
+        key[KEY_P] = 0;
+    }
+    
+    if( key[KEY_S] )
+    {
+        
+        static int i = 1;
+        
+        char file_name[50];
+        
+        sprintf(file_name,"../data/stats%05d.csv",i++);
+        
+        SaveStats(*network,file_name,0.0);
+        
+        key[KEY_S] = 0;
+        
+    }
+    
+    if(key[KEY_ESC])
+    {
+       
+        return true;
+    }
+
+
+    return false;
 }

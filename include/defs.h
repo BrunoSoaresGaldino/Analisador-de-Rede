@@ -11,7 +11,7 @@
 #define     NODE_RADIUS     10
 #define     SCREEN_WIDTH    1280
 #define     SCREEN_HEIGHT   720
-#define     DRAW_START      100
+#define     DRAW_START      ( 0.14 * SCREEN_WIDTH )
 
 #define     MAX_NAME_SIZE           40
 #define     MAX_FILE_NAME_SIZE      100

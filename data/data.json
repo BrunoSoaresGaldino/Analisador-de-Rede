@@ -3,7 +3,7 @@
 
 	"nodes":
     [
-        { "name": "Santa Elena", "node_type":2, "pos_x":0.999,"pos_y":0.82},
+        { "name": "Santa Elena", "node_type":2, "pos_x":0.9922,"pos_y":0.82},
         
         { "name": "Boa Vista", "node_type":2,"pos_x":0.749263, "pos_y": 0.311467},
         
@@ -25,22 +25,58 @@
         
         { "name": "Silves", "node_type":2,"pos_x":0.3435,"pos_y":0.5464},
         
-        { "name": "Oriximiná", "node_type":2,"pos_x":0.6734,"pos_y":0.343}
+        { "name": "Oriximiná", "node_type":2,"pos_x":0.6734,"pos_y":0.343},
+        
+        { "name":"Juriti", "node_type":2,"pos_x":0.2332,"pos_y":0.323 },
+        
+        {"name":"Paritins","node_type":2,"pos_x": 0.432, "pos_y": 0.545},
+        
+        {"name": "Jurupari", "node_type":2, "pos_x":0.293,"pos_y":0.954},
+        
+        { "name":"Laranjal","node_type":2, "pos_x":0.7733, "pos_y":0.8323 },
+        
+       { "name":"Santo Ant Jari","node_type": 1 , "pos_x": 0.122, "pos_y":0.762}
     ],
     "arcs":
     [
-        {"name_a":"Santa Elena","name_b":"Boa Vista"},
-        { "name_a":"Lechuga","name_b":"Cristiano Rocha"},
+        {"name_a":"Santa Elena","name_b":"Boa Vista","transportation_power":230},
+        
+        { "name_a":"Lechuga","name_b":"Cristiano Rocha","transportation_power":230},
+        
         { "name_a": "Lechuga","name_b": "Balbina"},
+        
         { "name_a": "Lechuga","name_b":"Jaraqui"},
+        
         { "name_a":"Lechuga","name_b":"Manaus"},
+        
         { "name_a":"Lechuga","name_b":"Jorge Teixeira"},
+        
         { "name_a":"Lechuga","name_b": "Jorge Teixeira"},
+        
         { "name_a":"Lechuga", "name_b": "Silves"},
+        
         { "name_a":"Cristiano Rocha", "name_b": "Presidente Figueiredo"},
+        
         { "name_a":"Presidente Figueiredo", "name_b": "Balbina"},
-        { "name_a":"Balbina", "name_b": "Manaus"}
-    
+        
+        { "name_a":"Balbina", "name_b": "Manaus"},
+        
+        { "name_a":"Jorge Teixeira","name_b":"Mauá"},
+        
+        { "name_a":"Silves","name_b":"Oriximiná"},
+        
+        { "name_a":"Oriximiná","name_b":"Juriti"},
+        
+        { "name_a":"Juriti","name_b":"Paritins"},
+        
+        { "name_a":"Oriximiná","name_b":"Jurupari"},
+        
+        { "name_a":"Jurupari","name_b":"Laranjal"},
+        
+        { "name_a":"Jurupari","name_b":"Laranjal"},
+        
+        { "name_a":"Laranjal","name_b":"Santo Ant Jari"}
+        
     ]
 	
 	

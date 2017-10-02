@@ -23,7 +23,6 @@ json_t *LoadJsonFile(const char *file_name)
     char         *data;
     json_t       *root;
     json_error_t error;
-    
     FILE         *file = fopen(file_name,"rb");
     
     if( !file )

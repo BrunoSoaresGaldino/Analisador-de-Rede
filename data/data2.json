@@ -1,0 +1,191 @@
+{
+	
+
+	"nodes":
+    [
+        { "name": "Santa Elena", "node_type":2, "pos_x":0.999,"pos_y":0.82},
+        
+        { "name": "Boa Vista", "node_type":2,"pos_x":0.749263, "pos_y": 0.311467},
+        
+        { "name": "Lechuga",  "node_type": 2 , "pos_x":0.632003, "pos_y":0.9676622},
+        
+        { "name": "Cristiano Rocha", "node_type":1, "pos_x": 0.829736, "pos_y":0.9679891},
+        
+        { "name": "Presidente Figueiredo", "node_type":2,"pos_x":0.233,"pos_y":0.4242},
+        
+        { "name": "Balbina","node_type":1,"pos_x":0.224813, "pos_y":0.9787889},
+        
+        { "name": "Jaraqui","node_type":1, "pos_x":0.729859, "pos_y":0.8653560},
+        
+        { "name": "Manaus", "node_type":2, "pos_x":0.167554, "pos_y": 0.9658766},
+        
+        { "name": "Jorge Teixeira", "node_type":2,"pos_x":0.1133,"pos_y":0.9929},
+        
+        { "name": "Mauá", "node_type":1,"pos_x":0.298083, "pos_x":0.9054949},
+        
+        { "name": "Silves", "node_type":2,"pos_x":0.3435,"pos_y":0.5464},
+        
+        { "name": "Oriximiná", "node_type":2,"pos_x":0.6734,"pos_y":0.343},
+        
+        { "name": "Santa Elena", "node_type":2, "pos_x":0.999,"pos_y":0.82},
+        
+        { "name": "Boa Vista", "node_type":2,"pos_x":0.749263, "pos_y": 0.311467},
+        
+        { "name": "Lechuga",  "node_type": 2 , "pos_x":0.632003, "pos_y":0.9676622},
+        
+        { "name": "Cristiano Rocha", "node_type":1, "pos_x": 0.829736, "pos_y":0.9679891},
+        
+        { "name": "Presidente Figueiredo", "node_type":2,"pos_x":0.233,"pos_y":0.4242},
+        
+        { "name": "Balbina","node_type":1,"pos_x":0.224813, "pos_y":0.9787889},
+        
+        { "name": "Jaraqui","node_type":1, "pos_x":0.729859, "pos_y":0.8653560},
+        
+        { "name": "Manaus", "node_type":2, "pos_x":0.167554, "pos_y": 0.9658766},
+        
+        { "name": "Jorge Teixeira", "node_type":2,"pos_x":0.1133,"pos_y":0.9929},
+        
+        { "name": "Mauá", "node_type":1,"pos_x":0.298083, "pos_x":0.9054949},
+        
+        { "name": "Silves", "node_type":2,"pos_x":0.3435,"pos_y":0.5464},
+        
+        { "name": "Oriximiná", "node_type":2,"pos_x":0.6734,"pos_y":0.343},
+        
+        { "name": "Santa Elena", "node_type":2, "pos_x":0.999,"pos_y":0.82},
+        
+        { "name": "Boa Vista", "node_type":2,"pos_x":0.749263, "pos_y": 0.311467},
+        
+        { "name": "Lechuga",  "node_type": 2 , "pos_x":0.632003, "pos_y":0.9676622},
+        
+        { "name": "Cristiano Rocha", "node_type":1, "pos_x": 0.829736, "pos_y":0.9679891},
+        
+        { "name": "Presidente Figueiredo", "node_type":2,"pos_x":0.233,"pos_y":0.4242},
+        
+        { "name": "Balbina","node_type":1,"pos_x":0.224813, "pos_y":0.9787889},
+        
+        { "name": "Jaraqui","node_type":1, "pos_x":0.729859, "pos_y":0.8653560},
+        
+        { "name": "Manaus", "node_type":2, "pos_x":0.167554, "pos_y": 0.9658766},
+        
+        { "name": "Jorge Teixeira", "node_type":2,"pos_x":0.1133,"pos_y":0.9929},
+        
+        { "name": "Mauá", "node_type":1,"pos_x":0.298083, "pos_x":0.9054949},
+        
+        { "name": "Silves", "node_type":2,"pos_x":0.3435,"pos_y":0.5464},
+        
+        { "name": "Oriximiná", "node_type":2,"pos_x":0.6734,"pos_y":0.343},
+        
+        { "name": "Santa Elena", "node_type":2, "pos_x":0.999,"pos_y":0.82},
+        
+        { "name": "Boa Vista", "node_type":2,"pos_x":0.749263, "pos_y": 0.311467},
+        
+        { "name": "Lechuga",  "node_type": 2 , "pos_x":0.632003, "pos_y":0.9676622},
+        
+        { "name": "Cristiano Rocha", "node_type":1, "pos_x": 0.829736, "pos_y":0.9679891},
+        
+        { "name": "Presidente Figueiredo", "node_type":2,"pos_x":0.233,"pos_y":0.4242},
+        
+        { "name": "Balbina","node_type":1,"pos_x":0.224813, "pos_y":0.9787889},
+        
+        { "name": "Jaraqui","node_type":1, "pos_x":0.729859, "pos_y":0.8653560},
+        
+        { "name": "Manaus", "node_type":2, "pos_x":0.167554, "pos_y": 0.9658766},
+        
+        { "name": "Jorge Teixeira", "node_type":2,"pos_x":0.1133,"pos_y":0.9929},
+        
+        { "name": "Mauá", "node_type":1,"pos_x":0.298083, "pos_x":0.9054949},
+        
+        { "name": "Silves", "node_type":2,"pos_x":0.3435,"pos_y":0.5464},
+        
+        { "name": "Oriximiná", "node_type":2,"pos_x":0.6734,"pos_y":0.343},
+        
+        { "name": "Santa Elena", "node_type":2, "pos_x":0.999,"pos_y":0.82},
+        
+        { "name": "Boa Vista", "node_type":2,"pos_x":0.749263, "pos_y": 0.311467},
+        
+        { "name": "Lechuga",  "node_type": 2 , "pos_x":0.632003, "pos_y":0.9676622},
+        
+        { "name": "Cristiano Rocha", "node_type":1, "pos_x": 0.829736, "pos_y":0.9679891},
+        
+        { "name": "Presidente Figueiredo", "node_type":2,"pos_x":0.233,"pos_y":0.4242},
+        
+        { "name": "Balbina","node_type":1,"pos_x":0.224813, "pos_y":0.9787889},
+        
+        { "name": "Jaraqui","node_type":1, "pos_x":0.729859, "pos_y":0.8653560},
+        
+        { "name": "Manaus", "node_type":2, "pos_x":0.167554, "pos_y": 0.9658766},
+        
+        { "name": "Jorge Teixeira", "node_type":2,"pos_x":0.1133,"pos_y":0.9929},
+        
+        { "name": "Mauá", "node_type":1,"pos_x":0.298083, "pos_x":0.9054949},
+        
+        { "name": "Silves", "node_type":2,"pos_x":0.3435,"pos_y":0.5464},
+        
+        { "name": "Oriximiná", "node_type":2,"pos_x":0.6734,"pos_y":0.343},
+        
+        { "name": "Santa Elena", "node_type":2, "pos_x":0.999,"pos_y":0.82},
+        
+        { "name": "Boa Vista", "node_type":2,"pos_x":0.749263, "pos_y": 0.311467},
+        
+        { "name": "Lechuga",  "node_type": 2 , "pos_x":0.632003, "pos_y":0.9676622},
+        
+        { "name": "Cristiano Rocha", "node_type":1, "pos_x": 0.829736, "pos_y":0.9679891},
+        
+        { "name": "Presidente Figueiredo", "node_type":2,"pos_x":0.233,"pos_y":0.4242},
+        
+        { "name": "Balbina","node_type":1,"pos_x":0.224813, "pos_y":0.9787889},
+        
+        { "name": "Jaraqui","node_type":1, "pos_x":0.729859, "pos_y":0.8653560},
+        
+        { "name": "Manaus", "node_type":2, "pos_x":0.167554, "pos_y": 0.9658766},
+        
+        { "name": "Jorge Teixeira", "node_type":2,"pos_x":0.1133,"pos_y":0.9929},
+        
+        { "name": "Mauá", "node_type":1,"pos_x":0.298083, "pos_x":0.9054949},
+        
+        { "name": "Silves", "node_type":2,"pos_x":0.3435,"pos_y":0.5464},
+        
+        { "name": "Oriximiná", "node_type":2,"pos_x":0.6734,"pos_y":0.343},
+        
+        { "name": "Santa Elena", "node_type":2, "pos_x":0.999,"pos_y":0.82},
+        
+        { "name": "Boa Vista", "node_type":2,"pos_x":0.749263, "pos_y": 0.311467},
+        
+        { "name": "Lechuga",  "node_type": 2 , "pos_x":0.632003, "pos_y":0.9676622},
+        
+        { "name": "Cristiano Rocha", "node_type":1, "pos_x": 0.829736, "pos_y":0.9679891},
+        
+        { "name": "Presidente Figueiredo", "node_type":2,"pos_x":0.233,"pos_y":0.4242},
+        
+        { "name": "Balbina","node_type":1,"pos_x":0.224813, "pos_y":0.9787889},
+        
+        { "name": "Jaraqui","node_type":1, "pos_x":0.729859, "pos_y":0.8653560},
+        
+        { "name": "Manaus", "node_type":2, "pos_x":0.167554, "pos_y": 0.9658766},
+        
+        { "name": "Jorge Teixeira", "node_type":2,"pos_x":0.1133,"pos_y":0.9929},
+        
+        { "name": "Mauá", "node_type":1,"pos_x":0.298083, "pos_x":0.9054949},
+        
+        { "name": "Silves", "node_type":2,"pos_x":0.3435,"pos_y":0.5464},
+        
+        { "name": "Oriximiná", "node_type":2,"pos_x":0.6734,"pos_y":0.343}
+    ],
+    "arcs":
+    [
+        {"name_a":"Santa Elena","name_b":"Boa Vista"},
+        { "name_a":"Lechuga","name_b":"Cristiano Rocha"},
+        { "name_a": "Lechuga","name_b": "Balbina"},
+        { "name_a": "Lechuga","name_b":"Jaraqui"},
+        { "name_a":"Lechuga","name_b":"Manaus"},
+        { "name_a":"Lechuga","name_b":"Jorge Teixeira"},
+        { "name_a":"Lechuga","name_b": "Jorge Teixeira"},
+        { "name_a":"Lechuga", "name_b": "Silves"},
+        { "name_a":"Cristiano Rocha", "name_b": "Presidente Figueiredo"},
+        { "name_a":"Presidente Figueiredo", "name_b": "Balbina"},
+        { "name_a":"Balbina", "name_b": "Manaus"}
+    
+    ]
+	
+	
+}
