@@ -7,8 +7,6 @@
         
         { "name": "Boa Vista", "node_type":2,"pos_x":0.749263, "pos_y": 0.311467},
         
-        { "name" : "Equador" , "node_type" : 2 , "pos_x" : 0.1020, "pos_y" : 0.7832 },
-        
         { "name": "Lechuga",  "node_type": 2 , "pos_x":0.632003, "pos_y":0.9676622},
         
         { "name": "Cristiano Rocha", "node_type":1, "pos_x": 0.829736, "pos_y":0.9679891},
@@ -37,50 +35,13 @@
         
         { "name":"Laranjal","node_type":2, "pos_x":0.7733, "pos_y":0.8323 },
         
-		{ "name":"Santo Ant Jari","node_type": 1 , "pos_x": 0.122, "pos_y":0.762},
-		
-	    { "name":"Santana","node_type": 1 , "pos_x": 0.846, "pos_y":0.9288},
-		
-		{ "name":"Macapa","node_type": 2 , "pos_x": 0.1567, "pos_y":0.3635},
-		
-		{ "name":"Ferreira Gomes","node_type": 1 , "pos_x": 0.9895, "pos_y":0.4647},
-		
-		{ "name":"Cachoeira Caldeirão","node_type": 1 , "pos_x": 0.2352, "pos_y":0.6845},
-		
-		{ "name":"Coarary Nunes","node_type": 1 , "pos_x": 0.5678, "pos_y":0.8654},
-		
-		{ "name":"Xingu","node_type": 2 , "pos_x": 0.3347, "pos_y":0.6866},
-		
-		{ "name":"Belo Monte","node_type": 1 , "pos_x": 0.5658, "pos_y":0.1246},
-		
-		{ "name":"Altamira","node_type": 1 , "pos_x": 0.2345, "pos_y":0.5898},
-		
-		{ "name":"Pimental","node_type": 2 , "pos_x": 0.3456, "pos_y":0.7898},
-		
-		{ "name":"Transamazônica","node_type": 2 , "pos_x": 0.2387, "pos_y":0.4569},
-		
-		{ "name":"Ruropolis","node_type": 2 , "pos_x": 0.3737, "pos_y":0.7965},
-		
-		{ "name":"Curuá-Una","node_type": 1 , "pos_x": 0.3848, "pos_y":0.1326},
-		
-		{ "name":"Tapajós 2","node_type": 2 , "pos_x": 0.9834, "pos_y":0.3895},
-		
-		{ "name":"Santarém","node_type": 1 , "pos_x": 0.3927, "pos_y":0.8645},
-		
-		{ "name":"Tucuruí","node_type": 1 , "pos_x": 0.2463, "pos_y":0.8864}
-		
+       { "name":"Santo Ant Jari","node_type": 1 , "pos_x": 0.122, "pos_y":0.762}
     ],
-    
     "arcs":
     [
+        {"name_a":"Santa Elena","name_b":"Boa Vista","transportation_power":230},
         
-        {"name_a":"Santa Elena","name_b":"Boa Vista"},
-        
-		{ "name_a": "Boa Vista","name_b": "Equador"},
-		
-		{ "name_a": "Equador","name_b": "Lechuga"},
-        
-        { "name_a":"Lechuga","name_b":"Cristiano Rocha"},
+        { "name_a":"Lechuga","name_b":"Cristiano Rocha","transportation_power":230},
         
         { "name_a": "Lechuga","name_b": "Balbina"},
         
@@ -90,15 +51,15 @@
         
         { "name_a":"Lechuga","name_b":"Jorge Teixeira"},
         
-		{ "name_a":"Lechuga","name_b":"Jorge Teixeira"},
+        { "name_a":"Lechuga","name_b": "Jorge Teixeira"},
         
         { "name_a":"Lechuga", "name_b": "Silves"},
-		
+        
         { "name_a":"Cristiano Rocha", "name_b": "Presidente Figueiredo"},
         
         { "name_a":"Presidente Figueiredo", "name_b": "Balbina"},
         
-        { "name_a":"Jaraqui", "name_b": "Manaus"},
+        { "name_a":"Balbina", "name_b": "Manaus"},
         
         { "name_a":"Jorge Teixeira","name_b":"Mauá"},
         
@@ -114,25 +75,7 @@
         
         { "name_a":"Jurupari","name_b":"Laranjal"},
         
-        { "name_a":"Laranjal","name_b":"Santo Ant Jari"},
-		
-		{ "name_a":"Laranjal","name_b":"Macapa"},
-		
-		{ "name_a":"Macapa","name_b":"Ferreira Gomes"},
-		
-		{ "name_a":"Ferreira Gomes","name_b":"Cachoeira Caldeirão"},
-		
-		{ "name_a":"Jurupari","name_b":"Xingu"},
-		
-		{ "name_a":"Xingu","name_b":"Belo Monte"},
-		
-		{ "name_a":"Xingu","name_b":"Belo Monte"},
-		
-		{ "name_a":"Xingu","name_b":"Altamira"},
-		
-		{ "name_a":"Xingu","name_b":"Belo Monte"},
-		
-		{ "name_a":"Xingu","name_b":"Tucuruí"}
+        { "name_a":"Laranjal","name_b":"Santo Ant Jari"}
         
     ]
 	

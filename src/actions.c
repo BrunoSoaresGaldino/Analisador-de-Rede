@@ -7,8 +7,7 @@ void RemoveNodeRandomly(Network *network)
     
     if( !network->number_of_nodes )
         return;
-    
-    srand((unsigned)time(NULL));
+   
     
     int rand_number = rand() % ( network->number_of_nodes );
     
@@ -20,10 +19,11 @@ void RemoveNodeRandomly(Network *network)
 
 void RemoveArcRandomly(Network *network)
 {
+    
     if( !network->number_of_arcs )
         return;
     
-    srand((unsigned) time(NULL));
+    
     
     int rand_number = rand() % ( network->number_of_arcs );
     
@@ -40,6 +40,7 @@ void RemoveN_NodesRandomly( Network * network , float n )
     int i = 0;
     int rand_number;
     
+    
     if( n > 0.0f && n < 1.1f )// trata n como o percentual de nos a serem removidos
     {
         
@@ -54,7 +55,7 @@ void RemoveN_NodesRandomly( Network * network , float n )
         
     }
     
-    srand( (unsigned)time(NULL));
+   
     
     while( i < nodes_to_remove && network->number_of_nodes )
     {
@@ -77,6 +78,7 @@ void RemoveN_ArcsRandomly(Network * network,float n)
     int arcs_to_remove = 0;
     int i = 0;
     int rand_number;
+   
     
     if( n > 0.0f && n < 1.0f )// trata n percentual de arcos a serem removidos
     {
@@ -92,7 +94,6 @@ void RemoveN_ArcsRandomly(Network * network,float n)
         
     }
     
-    srand( (unsigned)time(NULL));
     
     while( i < arcs_to_remove && network->number_of_arcs )
     {

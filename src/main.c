@@ -3,12 +3,15 @@
 #include <allegro.h>
 #include <math.h>
 #include <locale.h>
+#include <time.h>
 
 #include "../include/network_analyzer.h"
 
 
 int main(int argc ,char** argv)
 {
+    
+    srand( (unsigned)time(NULL) );
     
     bool exit_program = false;
     
