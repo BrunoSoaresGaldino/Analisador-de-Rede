@@ -11,7 +11,7 @@ void ParseArgs(int argc, char *argv[],ToDo *to_do)
     to_do->ensemble_to = 0.0f;
     to_do->display = true;
     to_do->make_ensemble = false;
-    strcpy(to_do->output_file,"ensemble.csv");
+    strcpy(to_do->output_file,"../data/ensemble.csv");
     *to_do->network_file = '\0';
    
     if(argc < 2)
@@ -24,13 +24,16 @@ void ParseArgs(int argc, char *argv[],ToDo *to_do)
             if( !strcmp(argv[i+1],ARCS) )
             {
                 i += 2;
-                to_do->arcs_to_del = atof(argv[i]);    
+                
+                if( i < argc )
+                    to_do->arcs_to_del = atof(argv[i]);    
             }
             
             else if( !strcmp(argv[i+1],NODES) )
             {
                 i += 2;
-                to_do->nodes_to_del = atof(argv[i]);
+                if( i < argc )
+                    to_do->nodes_to_del = atof(argv[i]);
             }
         }
         else if ( !strcmp(argv[i],NOT_DISPLAY) )
@@ -45,12 +48,12 @@ void ParseArgs(int argc, char *argv[],ToDo *to_do)
             to_do->make_ensemble = true;
             
             i++;
-            
-            to_do->ensemble_from = atof( argv[i] );
+            if( i < argc )
+                to_do->ensemble_from = atof( argv[i] );
             
             i++;
-            
-            to_do->ensemble_to = atof( argv[i] );
+            if( i < argc )
+                to_do->ensemble_to = atof( argv[i] );
         
         }
         
@@ -58,7 +61,8 @@ void ParseArgs(int argc, char *argv[],ToDo *to_do)
         {
             i++;
             
-            strcpy(to_do->output_file, argv[i] );
+            if( i < argc )
+                strcpy(to_do->output_file, argv[i] );
 
             
         }
@@ -66,8 +70,8 @@ void ParseArgs(int argc, char *argv[],ToDo *to_do)
         {
             
             i++;
-            
-            strcpy(to_do->network_file,argv[i] );
+            if( i < argc )
+                strcpy(to_do->network_file,argv[i] );
             
         }
         
