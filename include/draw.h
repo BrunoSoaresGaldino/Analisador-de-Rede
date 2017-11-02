@@ -10,6 +10,7 @@
 #include "statistics.h"
 
 
+int ComponentColor( int component_number );
 void DrawNetwork(BITMAP *buffer,Network *network);
 void DrawStats(BITMAP *buffer,Network * network);
 

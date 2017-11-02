@@ -10,8 +10,8 @@
 
 #define     NODE_RADIUS     10
 #define     SCREEN_WIDTH    1280
-#define     SCREEN_HEIGHT   720
-#define     DRAW_START      ( 0.14 * SCREEN_WIDTH )
+#define     SCREEN_HEIGHT   680
+#define     DRAW_START      ( 0.20 * SCREEN_WIDTH )
 
 #define     MAX_NAME_SIZE           40
 #define     MAX_FILE_NAME_SIZE      100
@@ -45,7 +45,7 @@ typedef struct
 {
     char name[MAX_NAME_SIZE];
     
-    char connected_to[MAX_NAME_SIZE];
+    int connected_component;
     
     float pos_x;
     
@@ -87,6 +87,12 @@ typedef struct
     int number_of_arcs;
     
     int number_of_generation_units;
+    
+    int number_of_connected_components;
+    
+    int greater_component_size;
+    
+    float components_medium_size;
     
     Node *nodes[MAX_NODES];
     

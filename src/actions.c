@@ -108,32 +108,46 @@ void RemoveN_ArcsRandomly(Network * network,float n)
 }
 
 
-void VisitNodes(Network *network)
+void VisitNodes( Network *network )
 {
     
 
-    bool visited_nodes[network->number_of_nodes]; 
+    bool visited_nodes[network->number_of_nodes];
     
-    int *matrix = GetAdjacenceMatrix(network);
+    int *matrix = GetAdjacenceMatrix( network );
     
     int i;
     
-    for(i = 0 ; i < network->number_of_nodes; i++)
+    int g_u_c =  0;// generation_unit_counter
+    
+    network->number_of_connected_components = 0;
+    
+    network->greater_component_size = 0;
+    
+    network->components_medium_size = 0;
+    
+    for( i = 0 ; i < network->number_of_nodes ; i++ )
     {
         visited_nodes[i] = false;
-        strcpy( network->nodes[i]->connected_to , network->nodes[i]->name );
+        
+        network->nodes[i]->connected_component = 0;
+        
         network->nodes[i]->on_line = false;
     }
     
-    for(i = 0; i < network->number_of_nodes;i++)
+    for( i = 0; i < network->number_of_nodes  && g_u_c < network->number_of_generation_units ; i++ )
     {    
 
-        if( network->nodes[i]->node_type == GENERATION_UNIT)
+        if( network->nodes[i]->node_type == GENERATION_UNIT )
         {
-            Visit(network,matrix,visited_nodes,i,i,network->nodes[i]->name);
-        
+            g_u_c++;
+            
+            Visit( network , matrix , visited_nodes, i , i , g_u_c );
+            
         }           
+        
     }
+    
     
     FreeAdjacenceMatrix(matrix);
     
@@ -144,7 +158,7 @@ void VisitNodes(Network *network)
 void SaveStats(Network *network, const char *file_name,float percent)
 {
    
-     
+    
     FILE *file = fopen(file_name,"a");
     
     if( !file )
@@ -155,7 +169,8 @@ void SaveStats(Network *network, const char *file_name,float percent)
         
     }
     
-    int components = NumberOfConnectedComponents(network);
+    int components = network->number_of_connected_components;
+    
     float inverse_components;
     
     if( components )
@@ -164,10 +179,10 @@ void SaveStats(Network *network, const char *file_name,float percent)
     }
     else 
     {
-        inverse_components = components;
+        inverse_components = 0;
     }
     
-    
+
     if ( GetFileSize(file) == 0)
     {
         fprintf(file,"%%,     Nos,    Arcos,  Usinas,  Componentes,  Componentes ^ -1,   Maior Componente,   Nos desconectados,\n");
@@ -183,8 +198,8 @@ void SaveStats(Network *network, const char *file_name,float percent)
                 network->number_of_generation_units,
                 components,
                 inverse_components,
-                LargestConnectedComponentSize(network),
-                NumberOfOffLineNodes(network)
+                1//LargestConnectedComponentSize(network),
+                ,NumberOfOffLineNodes(network)
                 );
     
     fclose(file);
@@ -252,39 +267,31 @@ void RemoveNodeOnClick( Network *network,int mouse_state,float mouse_x , float m
     
 }
 
-void ShowNodeNameOnClick( Network *network,int mouse_state,float mouse_x , float mouse_y , BITMAP *buffer)
+void ShowNodeNameMouseOn( Network * network,float mouse_x,float mouse_y, BITMAP *buffer )
 {
-    if( mouse_state == 2 )
+    int i;
+    
+    for( i = 0 ; i < network->number_of_nodes; i++ )
     {
-       
-        int i;
         
-        for( i = 0 ; i < network->number_of_nodes ; i++ )
-        {
+        if 
+        ( 
             
-            if ( 
-                    
-                    ( abs( mouse_x - ( network->nodes[i]->pos_x *(SCREEN_WIDTH - DRAW_START )+ DRAW_START ) ) <= NODE_RADIUS  ) 
-                    && 
-                    ( abs( mouse_y - ( network->nodes[i]->pos_y *(SCREEN_HEIGHT) ) ) ) <= NODE_RADIUS  
-                
-                ) 
-                {
-                    
-                    textprintf_ex( buffer , font ,0,SCREEN_HEIGHT-12,RED,-1,"%s",network->nodes[i]->name );
-                    
-                    return;
-                }
+            ( abs( mouse_x - ( network->nodes[i]->pos_x *(SCREEN_WIDTH - DRAW_START )+ DRAW_START ) ) <= NODE_RADIUS  ) 
+            && 
+            ( abs( mouse_y - ( network->nodes[i]->pos_y *(SCREEN_HEIGHT) ) ) ) <= NODE_RADIUS  
+            
+        ) 
+        {
+            textprintf_ex( buffer , font ,2,SCREEN_HEIGHT - 20,RED,-1,"%s",network->nodes[i]->name );
         }
-        
         
         
     }
     
 }
 
-
-bool UserInput( Network **network , Network **copy , BITMAP *buffer )
+bool UserAction( Network **network , Network **copy , BITMAP *buffer )
 {
     
     if(key[KEY_N])
@@ -309,7 +316,7 @@ bool UserInput( Network **network , Network **copy , BITMAP *buffer )
     if( key[KEY_C] )
     {
         
-        DestroyNetwork( *copy );
+        DestroyNetwork( *copy ); 
         
         *copy = CopyNetwork( *network );
         
@@ -377,7 +384,7 @@ bool UserInput( Network **network , Network **copy , BITMAP *buffer )
        
         return true;
     }
-
-
+    
+    
     return false;
 }

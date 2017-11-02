@@ -412,6 +412,7 @@ Network *CopyNetwork(Network *network)
 {
     
     Network *copy = CreateNetwork();
+    
     Node    *node;
     Arc     *arc;
     int     i = 0;

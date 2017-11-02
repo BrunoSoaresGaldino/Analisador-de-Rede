@@ -1,30 +1,26 @@
 
 #include "../include/draw.h"
 
+int ComponentColor( int component_number )
+{
+    int c = component_number;
+   
+    return makecol( c*10, c ,  (c%50)*50 );
+    
+}
 
 void DrawNetwork( BITMAP *buffer, Network *network )
 {
     
     int i;
     
-    clear_to_color(buffer,WHITE);
+    clear_to_color( buffer , WHITE );
     
     for( i = 0 ; i < network->number_of_nodes ; i++ )
     {
         
-        if( network->nodes[i]->on_line )
-        {
-            
-            circlefill( buffer, network->nodes[i]->pos_x * (SCREEN_WIDTH - DRAW_START) + DRAW_START, network->nodes[i]->pos_y * SCREEN_HEIGHT, NODE_RADIUS , GRAY );
-            
-        }
-        else 
-        {
-            
-            circlefill( buffer, network->nodes[i]->pos_x * (SCREEN_WIDTH - DRAW_START) + DRAW_START, network->nodes[i]->pos_y * SCREEN_HEIGHT , NODE_RADIUS , RED );
-            
-        }
-        
+        circlefill( buffer, network->nodes[i]->pos_x * (SCREEN_WIDTH - DRAW_START) + DRAW_START, 
+        network->nodes[i]->pos_y * SCREEN_HEIGHT, NODE_RADIUS , ComponentColor( network->nodes[i]->connected_component) );
         
     }
     
@@ -46,20 +42,21 @@ void DrawNetwork( BITMAP *buffer, Network *network )
     for( i = 0 ; i < network->number_of_nodes ; i++ )
     {
         
-        textprintf_ex(
+        textprintf_centre_ex(
                       buffer , font , 
                       network->nodes[i]->pos_x * ( SCREEN_W -DRAW_START) + DRAW_START,
-                      network->nodes[i]->pos_y * SCREEN_HEIGHT ,
-                      BLACK,-1,"%s",network->nodes[i]->connected_to);
-    
+                      network->nodes[i]->pos_y * SCREEN_HEIGHT - ( NODE_RADIUS/3) ,
+                      RED,-1,"%d",network->nodes[i]->connected_component );
+                       
     }
+    
 }
 
 
 
-void DrawStats( BITMAP * buffer, Network *network)
+void DrawStats( BITMAP * buffer, Network *network )
 {
-    int components = NumberOfConnectedComponents(network);
+    int components = network->number_of_connected_components;
     
     float inverse_components;
     
@@ -78,8 +75,9 @@ void DrawStats( BITMAP * buffer, Network *network)
     textprintf_ex( buffer, font, 1, 22, BLACK, -1, "Usinas: %d",network->number_of_generation_units);
     textprintf_ex( buffer, font, 1, 32, BLACK, -1, "Componentes: %d",components);
     textprintf_ex( buffer, font, 1, 42, BLACK, -1, "Componentes ^ -1: %.2f",inverse_components);
-    textprintf_ex( buffer, font, 1, 52, BLACK, -1, "Maior Componente: %d",LargestConnectedComponentSize(network));
+    textprintf_ex( buffer, font, 1, 52, BLACK, -1, "Maior Componente: %d",network->greater_component_size);
     textprintf_ex( buffer, font, 1, 62, BLACK, -1, "Nos desconectados: %d", NumberOfOffLineNodes(network) );
+    textprintf_ex( buffer, font, 1, 72, BLACK, -1, "Tam. medio das compon.: %.2f",network->components_medium_size );
     
     line(buffer,DRAW_START,0,DRAW_START,SCREEN_HEIGHT,BLACK);
     

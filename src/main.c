@@ -19,10 +19,10 @@ int main(int argc ,char** argv)
     
     int number_of_nodes = 0 ,number_of_arcs = 0;
     
-    ParseArgs(argc,argv,&to_do);
+    ParseArgs(argc,argv, &to_do );
     
-    Network *net = CreateNetwork();
-    Network *copy = CreateNetwork();
+    Network *net = CreateNetwork( );
+    Network *copy = NULL;
     
     json_t *root = LoadJsonFile(to_do.network_file);
     
@@ -84,7 +84,7 @@ int main(int argc ,char** argv)
      
        
         
-        exit_program = UserInput(&net,&copy,buffer_hold);
+        exit_program = UserAction(&net,&copy,buffer_hold);
         
         RemoveNodeOnClick( net , mouse_b , mouse_x , mouse_y );
         
@@ -97,21 +97,28 @@ int main(int argc ,char** argv)
         
         
         
-            VisitNodes(net);
+            VisitNodes( net );
         
-            DrawNetwork(buffer_hold,net);
+            DrawNetwork( buffer_hold , net );
         
-            DrawStats(buffer_hold,net);
+            DrawStats( buffer_hold, net );
             
            
         
         }
-        
-       
-        
+    
         draw_sprite(buffer,buffer_hold,0,0);
         
-        ShowNodeNameOnClick( net, mouse_b,mouse_x, mouse_y, buffer);
+        if( key[KEY_F1])
+        {
+            key[KEY_F1] = 0;
+            
+            Help();
+        }
+        
+        textprintf_ex(buffer,font,1,102,RED,-1,"Copia da rede? %c", copy ? 'S':'N');
+        
+        ShowNodeNameMouseOn(net,mouse_x,mouse_y,buffer);
         
         draw_sprite(buffer,arrow,mouse_x,mouse_y);
         
