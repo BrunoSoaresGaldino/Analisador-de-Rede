@@ -116,9 +116,9 @@ int main(int argc ,char** argv)
             Help();
         }
         
-        textprintf_ex(buffer,font,1,102,RED,-1,"Copia da rede? %c", copy ? 'S':'N');
+        textprintf_ex(buffer,font,1,132,RED,-1,"Copia da rede? %c", copy ? 'S':'N');
         
-        ShowNodeNameMouseOn(net,mouse_x,mouse_y,buffer);
+        ShowNodeInfoMouseOn(net,mouse_x,mouse_y,buffer);
         
         draw_sprite(buffer,arrow,mouse_x,mouse_y);
         

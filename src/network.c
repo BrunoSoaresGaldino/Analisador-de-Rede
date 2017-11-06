@@ -133,7 +133,9 @@ void CreateNode( Network *network , json_t *root )
         {
             
             str = json_string_value(key);
-            strncpy(node->name,str,MAX_NAME_SIZE);
+            
+            strncpy(node->name,str,MAX_NAME_SIZE-1);
+            
             
         }
         

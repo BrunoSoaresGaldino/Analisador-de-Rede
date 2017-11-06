@@ -20,6 +20,6 @@ void VisitNodes(Network *network);
 void SaveSats(Network *network,const char *file_name,float percent);
 void MakeEnsemble(Network **network,float ensemble_from, float ensemble_to, const char *out_file );
 void RemoveNodeOnClick(Network *network, int mouse_state,float mouse_x, float mouse_y );
-void ShowNodeNameMouseOn( Network * network,float mouse_x,float mouse_y,BITMAP *buffer);
+void ShowNodeInfoMouseOn( Network * network,float mouse_x,float mouse_y,BITMAP *buffer);
 bool UserAction( Network **network, Network **copy,BITMAP *buffer);
 #endif

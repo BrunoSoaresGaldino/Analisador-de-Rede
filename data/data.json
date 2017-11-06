@@ -3,7 +3,7 @@
 
 	"nodes":
     [
-        { "name": "Santa Elena", "node_type":2, "pos_x":0.9922,"pos_y":0.82},
+        { "name": "Santa Elena", "node_type":2, "pos_x":0.9922,"pos_y":0.82,"power_in":10.01},
         
         { "name": "Boa Vista", "node_type":2,"pos_x":0.749263, "pos_y": 0.311467},
         
@@ -61,7 +61,7 @@
 		
 		{ "name":"Ruropolis","node_type": 2 , "pos_x": 0.3737, "pos_y":0.7965},
 		
-		{ "name":"Curuá-Una","node_type": 1 , "pos_x": 0.3848, "pos_y":0.1326},
+		{ "name":"Curuá-Una","node_type": 1 , "pos_x": 0.3848, "pos_y":0.1326,"power_in":8.56},
 		
 		{ "name":"Tapajós 2","node_type": 2 , "pos_x": 0.9834, "pos_y":0.3895},
 		

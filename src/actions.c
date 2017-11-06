@@ -267,7 +267,7 @@ void RemoveNodeOnClick( Network *network,int mouse_state,float mouse_x , float m
     
 }
 
-void ShowNodeNameMouseOn( Network * network,float mouse_x,float mouse_y, BITMAP *buffer )
+void ShowNodeInfoMouseOn( Network * network,float mouse_x,float mouse_y, BITMAP *buffer )
 {
     int i;
     
@@ -283,12 +283,16 @@ void ShowNodeNameMouseOn( Network * network,float mouse_x,float mouse_y, BITMAP 
             
         ) 
         {
-            textprintf_ex( buffer , font ,2,SCREEN_HEIGHT - 20,RED,-1,"%s",network->nodes[i]->name );
+            rect(buffer,2,SCREEN_HEIGHT-200,DRAW_START-2,SCREEN_HEIGHT-2,RED);
+            
+            textprintf_ex( buffer , font ,3,SCREEN_HEIGHT - 198,BLACK,-1,"%s",network->nodes[i]->name);
+            textprintf_ex( buffer , font ,3,SCREEN_HEIGHT - 188,BLACK,-1,"Tipo: %s", network->nodes[i]->node_type == GENERATION_UNIT ? "Geração": "Transmissão" );
+            textprintf_ex( buffer , font ,3,SCREEN_HEIGHT - 178,BLACK,-1,"Potencia de saída: %.2f",network->nodes[i]->power_out );
+            textprintf_ex( buffer , font ,3,SCREEN_HEIGHT - 168,BLACK,-1,"Potencia de entrada: %.2f", network->nodes[i]->power_in );
+            textprintf_ex( buffer , font ,3,SCREEN_HEIGHT - 158,BLACK,-1,"Pot. máxima de operação: %.2f", network->nodes[i]->max_operation_power );
+            textprintf_ex( buffer , font ,3,SCREEN_HEIGHT - 148,BLACK,-1,"Pot. mínima de operação: %.2f", network->nodes[i]->min_operation_power );
         }
-        
-        
     }
-    
 }
 
 bool UserAction( Network **network , Network **copy , BITMAP *buffer )
@@ -316,7 +320,18 @@ bool UserAction( Network **network , Network **copy , BITMAP *buffer )
     if( key[KEY_C] )
     {
         
-        DestroyNetwork( *copy ); 
+        key[KEY_C] = 0;
+        
+        if( *copy )
+        {
+        
+            DestroyNetwork( *copy ); 
+            
+            *copy = NULL;
+            
+            return false;
+            
+        }
         
         *copy = CopyNetwork( *network );
         
@@ -325,8 +340,6 @@ bool UserAction( Network **network , Network **copy , BITMAP *buffer )
             allegro_message("Nao foi possivel copiar a rede");
             
         }
-       
-        key[KEY_C] = 0;
         
         return false;
         
@@ -335,14 +348,17 @@ bool UserAction( Network **network , Network **copy , BITMAP *buffer )
     if( key[KEY_R] )
     {
     
-        DestroyNetwork( *network );
-        
-        *network = CopyNetwork(*copy);
-            
-        if( !( *network ) )
+        if( *copy )
         {
-            allegro_message("Nao foi possivel restaurar a rede");
+            DestroyNetwork( *network );
         
+            *network = CopyNetwork(*copy);
+            
+            if( !( *network ) )
+            {
+                allegro_message("Nao foi possivel restaurar a rede");
+        
+            }
         }
         
         key[KEY_R] = 0;
