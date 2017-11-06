@@ -79,7 +79,7 @@ void DrawStats( BITMAP * buffer, Network *network )
     textprintf_ex( buffer, font, 1, 52, BLACK, -1, "Maior Componente: %d",network->greater_component_size);
     textprintf_ex( buffer, font, 1, 62, BLACK, -1, "Nós desconectados: %d", NumberOfOffLineNodes(network) );
     textprintf_ex( buffer, font, 1, 72, BLACK, -1, "Tam médio das compon: %.2f",network->components_medium_size );
-    textprintf_ex( buffer, font, 1, 82, BLACK, -1, "Média de arcos por nó: %.2f",(float)network->number_of_arcs/(float)network->number_of_nodes );
+    textprintf_ex( buffer, font, 1, 82, BLACK, -1, "Média de arcos por nó: %.2f", network->number_of_nodes ? (float)network->number_of_arcs/(float)network->number_of_nodes  : 0 ) ;
     
     line(buffer,DRAW_START,0,DRAW_START,SCREEN_HEIGHT,BLACK);
     

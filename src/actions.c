@@ -285,12 +285,12 @@ void ShowNodeInfoMouseOn( Network * network,float mouse_x,float mouse_y, BITMAP 
         {
             rect(buffer,2,SCREEN_HEIGHT-200,DRAW_START-2,SCREEN_HEIGHT-2,RED);
             
-            textprintf_ex( buffer , font ,3,SCREEN_HEIGHT - 198,BLACK,-1,"%s",network->nodes[i]->name);
-            textprintf_ex( buffer , font ,3,SCREEN_HEIGHT - 188,BLACK,-1,"Tipo: %s", network->nodes[i]->node_type == GENERATION_UNIT ? "Geração": "Transmissão" );
-            textprintf_ex( buffer , font ,3,SCREEN_HEIGHT - 178,BLACK,-1,"Potencia de saída: %.2f",network->nodes[i]->power_out );
-            textprintf_ex( buffer , font ,3,SCREEN_HEIGHT - 168,BLACK,-1,"Potencia de entrada: %.2f", network->nodes[i]->power_in );
-            textprintf_ex( buffer , font ,3,SCREEN_HEIGHT - 158,BLACK,-1,"Pot. máxima de operação: %.2f", network->nodes[i]->max_operation_power );
-            textprintf_ex( buffer , font ,3,SCREEN_HEIGHT - 148,BLACK,-1,"Pot. mínima de operação: %.2f", network->nodes[i]->min_operation_power );
+            textprintf_ex( buffer , font ,4,SCREEN_HEIGHT - 198,BLACK,-1,"%s",network->nodes[i]->name);
+            textprintf_ex( buffer , font ,4,SCREEN_HEIGHT - 188,BLACK,-1,"Tipo: %s", network->nodes[i]->node_type == GENERATION_UNIT ? "Geração": "Transmissão" );
+            textprintf_ex( buffer , font ,4,SCREEN_HEIGHT - 178,BLACK,-1,"Potencia de saída: %.2f",network->nodes[i]->power_out );
+            textprintf_ex( buffer , font ,4,SCREEN_HEIGHT - 168,BLACK,-1,"Potencia de entrada: %.2f", network->nodes[i]->power_in );
+            textprintf_ex( buffer , font ,4,SCREEN_HEIGHT - 158,BLACK,-1,"Pot. máxima de operação: %.2f", network->nodes[i]->max_operation_power );
+            textprintf_ex( buffer , font ,4,SCREEN_HEIGHT - 148,BLACK,-1,"Pot. mínima de operação: %.2f", network->nodes[i]->min_operation_power );
         }
     }
 }
