@@ -155,7 +155,7 @@ void VisitNodes( Network *network )
 }
 
 
-void SaveStats(Network *network, const char *file_name,float percent)
+void SaveStats(Network *network, const char *file_name,int percent)
 {
    
     
@@ -192,14 +192,14 @@ void SaveStats(Network *network, const char *file_name,float percent)
         fprintf(
                 file,
                 "%3d,   %4d,   %4d,     %3d,     %4d,           %0.2f,               %4d,                %4d,\n",
-                (int)(percent*100.0),
+                percent,
                 network->number_of_nodes,
                 network->number_of_arcs,
                 network->number_of_generation_units,
                 components,
                 inverse_components,
-                1//LargestConnectedComponentSize(network),
-                ,NumberOfOffLineNodes(network)
+                network->greater_component_size,
+                NumberOfOffLineNodes(network)
                 );
     
     fclose(file);
@@ -208,33 +208,38 @@ void SaveStats(Network *network, const char *file_name,float percent)
 
 
 
-void MakeEnsemble(Network **network,float ensemble_from, float ensemble_to, const char *out_file)
+void MakeEnsemble(Network **network,int ensemble_from, int ensemble_to,int samples, const char *out_file)
 {
     float i;
+    int j = 0;
+    
     Network *copy = NULL;
     
-    for( i = ensemble_from ; i <= ensemble_to ; i += 0.01 )
+    for( j = 0; j < samples; j++)
     {
-    
-        DestroyNetwork(copy);
         
-        copy = CopyNetwork(*network);
-        
-        if( !copy )
+        for( i = ensemble_from ; i <= ensemble_to ; i += 1 )
         {
-            allegro_message("Nao foi possivel fazer o Ensembly estatistico");
-            return;
+        
+            DestroyNetwork(copy);
+            
+            copy = CopyNetwork(*network);
+            
+            if( !copy )
+            {
+                allegro_message("Nao foi possivel fazer o Ensembly estatistico");
+                return;
+            }
+            
+            RemoveN_ArcsRandomly( copy , i/100 );
+            
+            VisitNodes( copy );
+            
+            SaveStats(copy,out_file,i);
+            
         }
-        
-        RemoveN_ArcsRandomly( copy , i );
-        
-        VisitNodes( copy );
-        
-        SaveStats(copy,out_file,i);
-        
-    }
     
-   
+    }
 }
 
 void RemoveNodeOnClick( Network *network,int mouse_state,float mouse_x , float mouse_y )
@@ -291,7 +296,12 @@ void ShowNodeInfoMouseOn( Network * network,float mouse_x,float mouse_y, BITMAP 
             textprintf_ex( buffer , font ,4,SCREEN_HEIGHT - 168,BLACK,-1,"Potencia de entrada: %.2f", network->nodes[i]->power_in );
             textprintf_ex( buffer , font ,4,SCREEN_HEIGHT - 158,BLACK,-1,"Pot. máxima de operação: %.2f", network->nodes[i]->max_operation_power );
             textprintf_ex( buffer , font ,4,SCREEN_HEIGHT - 148,BLACK,-1,"Pot. mínima de operação: %.2f", network->nodes[i]->min_operation_power );
+            
+            break;
         }
+        
+        
+        
     }
 }
 

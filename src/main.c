@@ -26,8 +26,8 @@ int main(int argc ,char** argv)
     
     json_t *root = LoadJsonFile(to_do.network_file);
     
-    CreateNode(net,root);
-    CreateArc(net,root);
+    CreateNodes(net,root);
+    CreateArcs(net,root);
     
     json_decref(root);
     
@@ -74,7 +74,7 @@ int main(int argc ,char** argv)
     if( to_do.make_ensemble )
     {
     
-        MakeEnsemble( &net, to_do.ensemble_from, to_do.ensemble_to,to_do.output_file);
+        MakeEnsemble( &net, to_do.ensemble_from, to_do.ensemble_to,to_do.samples,to_do.output_file);
        
     }
     
@@ -113,7 +113,7 @@ int main(int argc ,char** argv)
         {
             key[KEY_F1] = 0;
             
-            Help();
+            Help(); 
         }
         
         textprintf_ex(buffer,font,1,132,RED,-1,"Copia da rede? %c", copy ? 'S':'N');

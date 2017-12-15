@@ -3,7 +3,7 @@
 #include "../include/network.h"
 
 //Obtem o enderco de um no, a partir do seu idice no array de nos da rede
-Node *GetNodeAddres(Network *network,int node_index)
+Node *GetNodeAddress(Network *network,int node_index)
 {
     if( ( node_index < 0 ) || ( node_index >= MAX_NODES ) || ( network->number_of_nodes == 0))// caso o indice seja invalido, retorna null
         return NULL;
@@ -14,7 +14,7 @@ Node *GetNodeAddres(Network *network,int node_index)
 
 
 //Obtem o endereco de um arco, a partir de seu indice no array de arcos
-Arc *GetArcAddres(Network *network,int arc_index)
+Arc *GetArcAddress(Network *network,int arc_index)
 {
     if( ( arc_index < 0 ) || ( arc_index >= MAX_ARCS ) || ( network->number_of_arcs == 0 ) )//caso o indice seja invalido, retorna null
         return NULL;
@@ -62,7 +62,7 @@ int GetArcNumber( Network* network , Arc *arc )
 
 
 // otem o endereco de um no a partir do seu nome
-Node *GetNodeAddresFromName( Network *network , const char *node_name )
+Node *GetNodeAddressByName( Network *network , const char *node_name )
 {
     
     int i;
@@ -75,7 +75,7 @@ Node *GetNodeAddresFromName( Network *network , const char *node_name )
     
 }
 
-int GetNodeNumberFromName(Network *network,const char *node_name)
+int GetNodeNumberByName(Network *network,const char *node_name)
 {
     
     int i;
@@ -88,7 +88,7 @@ int GetNodeNumberFromName(Network *network,const char *node_name)
 }
 
 //Cria um no e ajusta seus atributos de acordo com os parametros recebidos
-void CreateNode( Network *network , json_t *root )
+void CreateNodes( Network *network , json_t *root )
 {
     Node            *node;// ponteiro para o no a ser criado
     json_t          *nodes;// ponteiro para o array json, contendo as informações do nós
@@ -225,7 +225,7 @@ void DestroyNode(Network *network,int node_index)
     if ( !network->number_of_nodes )
         return;
     
-    Node *node = GetNodeAddres(network,node_index);
+    Node *node = GetNodeAddress(network,node_index);
         if(!node)
             return;
     
@@ -258,7 +258,7 @@ void DestroyNode(Network *network,int node_index)
 
 
 // Cria arcos
-void CreateArc(Network *network,json_t *root)
+void CreateArcs(Network *network,json_t *root)
 {
     Arc        *arc;
     json_t     *arcs;
@@ -297,7 +297,7 @@ void CreateArc(Network *network,json_t *root)
         if(key)
         {
             str = json_string_value( key );
-            arc->node_a = GetNodeAddresFromName( network , str );
+            arc->node_a = GetNodeAddressByName( network , str );
         }
         
         
@@ -305,20 +305,20 @@ void CreateArc(Network *network,json_t *root)
         if(key)
         {
             str = json_string_value( key );
-            arc->node_b = GetNodeAddresFromName( network , str );
+            arc->node_b = GetNodeAddressByName( network , str );
         }
         
         
         key = json_object_get( object , "num_a" );
         if( key )
         {
-            arc->node_a = GetNodeAddres( network , json_integer_value( key ) - 1 );
+            arc->node_a = GetNodeAddress( network , json_integer_value( key ) - 1 );
         }
         
         key = json_object_get(object,"num_b");
         if(key)
         {
-            arc->node_b = GetNodeAddres( network,json_integer_value( key ) - 1 );
+            arc->node_b = GetNodeAddress( network,json_integer_value( key ) - 1 );
         }
         
         
@@ -356,7 +356,7 @@ void DestroyArc(Network *network,int arc_index)
     
     if( !network->number_of_arcs );
     
-    Arc *arc = GetArcAddres(network,arc_index);
+    Arc *arc = GetArcAddress(network,arc_index);
     
     if( !arc )
         return;
@@ -459,9 +459,9 @@ Network *CopyNetwork(Network *network)
         
         node_b_index = GetNodeNumber( network, network->arcs[i]->node_b );
         
-        arc->node_a = GetNodeAddres( copy,node_a_index);
+        arc->node_a = GetNodeAddress( copy,node_a_index);
         
-        arc->node_b = GetNodeAddres( copy, node_b_index);
+        arc->node_b = GetNodeAddress( copy, node_b_index);
         
         arc->direction = network->arcs[i]->direction;
         
