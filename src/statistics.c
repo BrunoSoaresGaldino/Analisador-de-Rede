@@ -2,7 +2,7 @@
 
 #include "../include/statistics.h"
 
-void Visit(Network* network, int* matrix, bool* visited_nodes, int node, int last_node, int connected_component )
+void Visit(Network* network, Matrix* matrix, bool* visited_nodes, int node, int last_node, int connected_component )
 {   
     
     static int count = 0;
@@ -32,7 +32,7 @@ void Visit(Network* network, int* matrix, bool* visited_nodes, int node, int las
             continue;// nao visita o no de onde veio
         }
 
-        if( *( matrix + (node*network->number_of_nodes)+ i) )
+        if( MatrixGetValue( matrix , node , i ) )
         {
             //visita os visinhos
             Visit(network,matrix,visited_nodes,i,node,connected_component);

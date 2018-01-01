@@ -10,6 +10,7 @@
 #include "network.h"
 #include "io.h"
 #include "draw.h"
+#include "TAD.h"
 #include "help.h"
 
 #endif

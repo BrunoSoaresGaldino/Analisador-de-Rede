@@ -1,4 +1,3 @@
-
 #include "../include/io.h"
 
 size_t GetFileSize(FILE *file)

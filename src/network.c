@@ -482,13 +482,12 @@ Network *CopyNetwork(Network *network)
 
 
 
-int *GetAdjacenceMatrix(Network *network)
+Matrix *GetAdjacenceMatrix(Network *network)
 {
     
-    //aloca memoria suficiente para construir a matriz adjacencia da rede
-    size_t matrix_size = ( network->number_of_nodes ) * ( network->number_of_nodes );
     
-    int *matrix = calloc( matrix_size , sizeof ( int ) );
+    Matrix *matrix = NewMatrix( network->number_of_nodes , network->number_of_nodes , 0 );
+    
     int i;
     
     if( !matrix )
@@ -503,8 +502,9 @@ int *GetAdjacenceMatrix(Network *network)
     
     for( i = 0 ; i < network->number_of_arcs; i++ )
     {
-        *(matrix + GetNodeNumber( network, network->arcs[i]->node_a ) * ( network->number_of_nodes ) + GetNodeNumber( network, network->arcs[i]->node_b) ) = 1;
-        *(matrix + GetNodeNumber( network, network->arcs[i]->node_b ) * ( network->number_of_nodes ) + GetNodeNumber( network, network->arcs[i]->node_a) ) = 1;    
+        MatrixSetValue( matrix , GetNodeNumber( network, network->arcs[i]->node_a ) , GetNodeNumber( network, network->arcs[i]->node_b) , 1 );
+        MatrixSetValue( matrix , GetNodeNumber( network, network->arcs[i]->node_b ) , GetNodeNumber( network, network->arcs[i]->node_a) , 1 );
+        
     }
     
     return matrix;
@@ -513,8 +513,10 @@ int *GetAdjacenceMatrix(Network *network)
 
 
 
-void FreeAdjacenceMatrix(int *matrix)
+void FreeAdjacenceMatrix(Matrix *matrix)
 {
     if( matrix )//caso seja passado um ponteiro valido, desaloca
-        free( matrix );//a area de memoria apontada por ele.
+    {
+        DestroyMatrix( matrix );
+    }
 }

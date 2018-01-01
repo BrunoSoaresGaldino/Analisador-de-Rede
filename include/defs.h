@@ -124,5 +124,28 @@ typedef struct
     
 }ToDo;
 
+typedef struct Cell Cell;
+
+struct Cell
+{
+    int value;
+    
+    int column;
+    
+    Cell *next;
+    
+};
+
+typedef struct Matrix
+{
+    
+    int lines;
+    
+    int columns;
+    
+    Cell **cells;
+    
+    
+} Matrix;
 
 #endif

@@ -9,6 +9,7 @@
 #include <jansson.h>
 
 #include "defs.h"
+#include "TAD.h"
 
 Node *GetNodeAddress(Network* network,int node_index);
 Arc *GetArcAddress(Network* network,int arc_index);
@@ -32,8 +33,8 @@ void DestroyNetwork(Network *network);
 Network *CopyNetwork(Network *network);
 
 
-int *GetAdjacenceMatrix(Network *network);
-void FreeAdjacenceMatrix(int *matrix);
+Matrix *GetAdjacenceMatrix(Network *network);
+void FreeAdjacenceMatrix(Matrix *matrix);
 
 //******************************************************************************
 #endif

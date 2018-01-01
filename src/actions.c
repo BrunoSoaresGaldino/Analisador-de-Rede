@@ -114,7 +114,7 @@ void VisitNodes( Network *network )
 
     bool visited_nodes[network->number_of_nodes];
     
-    int *matrix = GetAdjacenceMatrix( network );
+    Matrix *matrix = GetAdjacenceMatrix( network );
     
     int i;
     

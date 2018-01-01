@@ -11,6 +11,7 @@
 #include "network.h"
 #include "statistics.h"
 #include "io.h"
+#include "TAD.h"
 
 void RemoveNodeRandomly(Network *network);
 void RemoveArcRandomly(Network *network);
