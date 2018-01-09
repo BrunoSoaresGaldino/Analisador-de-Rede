@@ -2,7 +2,7 @@
 
 #include "../include/statistics.h"
 
-void Visit(Network* network, Matrix* matrix, bool* visited_nodes, int node, int last_node, int connected_component )
+void Visit( Network* network, Matrix* matrix, bool* visited_nodes, int node, int last_node, int connected_component )
 {   
     
     static int count = 0;
@@ -71,12 +71,17 @@ void Visit(Network* network, Matrix* matrix, bool* visited_nodes, int node, int 
 
 int NumberOfOffLineNodes(Network* network)
 {
-    int  i = 0;
+    int  i;
+    
     int off_line_nodes = 0;
     
-    for( ; i < network->number_of_nodes; i++)
+    for( i = 0 ; i < network->number_of_nodes; i++)
+    {
         if( !network->nodes[i]->on_line)
+        {
             off_line_nodes++;
+        }
+    }
     
     return off_line_nodes;
 }

@@ -9,7 +9,7 @@
 #include "defs.h"
 
 Cell *NewCell( );
-Matrix *NewMatrix( int lines , int colums , int elements , ... );
+Matrix *NewMatrix( int lines , int colums );
 
 bool MatrixSetValue( Matrix *matrix , int line , int column , int value );
 int MatrixGetValue( Matrix *matrix , int line , int column );

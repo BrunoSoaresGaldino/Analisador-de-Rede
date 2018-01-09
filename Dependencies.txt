@@ -1,2 +1,0 @@
-Allegro 4.4.2
-Jansson 2.5

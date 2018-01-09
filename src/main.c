@@ -43,7 +43,7 @@ int main(int argc ,char** argv)
     
     if ( set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_WIDTH,SCREEN_HEIGHT,0,0) )
     {
-        fputs("Resolucao de video nao suportada",stderr);
+        fputs("Configuracao de video nao suportada",stderr);
         
         DestroyNetwork( net );
         DestroyNetwork( copy );
@@ -88,14 +88,12 @@ int main(int argc ,char** argv)
         
         RemoveNodeOnClick( net , mouse_b , mouse_x , mouse_y );
         
-        if( ( number_of_arcs != net->number_of_arcs ) || ( number_of_nodes != net->number_of_nodes ) )
+        if( ( number_of_arcs != net->number_of_arcs ) || ( number_of_nodes != net->number_of_nodes ) )//só executa caso haja alguma variação na rede
         {
             
             number_of_arcs = net->number_of_arcs;
             
             number_of_nodes = net->number_of_nodes;
-        
-        
         
             VisitNodes( net );
         

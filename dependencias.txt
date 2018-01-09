@@ -1,0 +1,7 @@
+Allegro 4.4.2
+
+Esta ferramenta utiliza a biblioteca Allegro para desenhar a representação visual da rede. A Allegro está disponível para download em  : https://www.allegro.cc/files/?v=4.4.
+
+Jansson 2.5
+
+O Jansson é utilizado para fazer parsing do arquivo de entrada da rede. O formato de arquivo utilizado no projeto, utiliza a sintaxe do JSON. Você pode baixar em: http://www.digip.org/jansson/

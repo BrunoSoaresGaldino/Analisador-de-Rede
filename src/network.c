@@ -480,13 +480,11 @@ Network *CopyNetwork(Network *network)
     
 }
 
-
-
 Matrix *GetAdjacenceMatrix(Network *network)
 {
     
     
-    Matrix *matrix = NewMatrix( network->number_of_nodes , network->number_of_nodes , 0 );
+    Matrix *matrix = NewMatrix( network->number_of_nodes , network->number_of_nodes );
     
     int i;
     
@@ -510,8 +508,6 @@ Matrix *GetAdjacenceMatrix(Network *network)
     return matrix;
 
 }
-
-
 
 void FreeAdjacenceMatrix(Matrix *matrix)
 {

@@ -3,135 +3,132 @@
 
 Cell *NewCell( )
 {
-    Cell *cell = calloc( 1, sizeof(Cell) );
+    Cell *cell = calloc( 1 , sizeof(Cell) );
     
-    if( !cell )
+    if( cell )
     {
-        return NULL;
+        return cell;
     }        
     
-    return cell;
+    return NULL;
     
 }
 
-Matrix *NewMatrix( int lines , int columns , int elements, ... )
+Matrix *NewMatrix( int lines , int columns )
 {
-    Matrix *matrix = calloc( 1 , sizeof( Matrix));
     
-    int i;
-    int j;
-    int z;
+    Matrix *matrix = calloc( 1 , sizeof( Matrix) );
    
-    va_list list;
-   
-    if( !matrix )
+    if( matrix )
     {
-        return NULL;
-    }
-    
-    matrix->cells = calloc( lines , sizeof(Cell) );
-    
-    if( !matrix->cells )
-    {
-        free(matrix);
         
-        return NULL;
-        
-    }
+        matrix->cells = calloc( lines , sizeof( Cell ) );
     
-    matrix->lines = lines;
-    
-    matrix->columns = columns;
-    
-    va_start( list , elements );
-    
-    for( i = 0 , z = 0 ; i < lines && z < elements ; i++ )
-    {
-        for( j = 0 ; j < columns && z < elements ; j++ , z++ )
+        if( matrix->cells )
         {
+            matrix->lines = lines;
+    
+            matrix->columns = columns;
             
-            MatrixSetValue( matrix , i , j , va_arg( list , int ) );
-            
-        }    
+            return matrix;
+        }
         
-        
+        free( matrix );
+       
     }
     
-    va_end(list);
-    
-    return matrix;
+    return NULL;
     
 }
 
 bool MatrixSetValue( Matrix *matrix , int line , int column , int value )
 {
-    if( line > matrix->lines-1 || column > matrix->columns-1 || !value )
+    
+    if( line < matrix->lines && column < matrix->columns && line > -1 && column > -1 )
     {
-        return false;
-    }
     
+        Cell *cell = matrix->cells[line];
+        Cell *aux = NULL;
     
-    Cell *cell = matrix->cells[line];
-    Cell *new_cell;
-    
-    if( !cell )//empty line
-    {
-       if( ( cell = matrix->cells[line] = NewCell( ) ) )
-       {
-            cell->value = value;
-            return true;
-       }
+        if( !cell )//empty line
+        {
+            if( ( matrix->cells[line] = NewCell( ) ) && value )
+            {
+                matrix->cells[line]->value = value;
+                
+                return true;
+            }
        
-       return false;
+            return false;
+        }
+    
+        while( cell )
+        {
+            if( cell->column == column )//the cell already exists
+            {
+                if( value )
+                {
+                    cell->value = value;
+                    
+                    return true;
+                    
+                }
+                
+                else if( aux )
+                {
+                    aux->next = cell->next;
+                }
+                
+                free( cell );
+                
+                return true;
+                
+            }
+            
+            if( !cell->next )//the cell was the last
+            {
+                if( ( cell->next = NewCell( ) ) )
+                {
+                    cell->next->value = value;
+                    
+                    cell->next->column = column; 
+                    
+                    return true;
+                    
+                }
+                
+                return false;
+            }
+            
+            if( cell->next->column > column )// the next cell have a greather column index
+            {
+                
+                if( ( aux = NewCell( ) ) )
+                {
+                    
+                    aux->next = cell->next;
+                    
+                    cell->next = aux;
+                    
+                    aux->value = value;
+                    
+                    aux->column = column;
+                    
+                    return true;
+                    
+                }
+                
+                return false;
+            }
+            
+            aux = cell;
+            
+            cell = cell->next;
+        }
+        
+        
     }
     
-    while( cell )
-    {
-        if( cell->column == column )//the cell already exists
-        {
-            cell->value = value;
-        }
-        
-        if( !cell->next )//the cell was the last
-        {
-            if( ( cell->next = NewCell( ) ) )
-            {
-                cell->next->value = value;
-                
-                cell->next->column = column; 
-                
-                return true;
-                
-            }
-            
-            return false;
-        }
-        
-        if( cell->next->column > column )// the next cell have a greather column index
-        {
-            
-            if( ( new_cell = NewCell( ) ) )
-            {
-                
-                new_cell->next = cell->next;
-                
-                cell->next = new_cell;
-                
-                new_cell->value = value;
-                
-                new_cell->column = column;
-                
-                return true;
-                
-            }
-            
-            return false;
-        }
-        
-        
-        
-        cell = cell->next;
-    }
     
     return false;
     
@@ -142,6 +139,7 @@ int MatrixGetValue( Matrix *matrix , int line , int column )
     
     if( line < matrix->lines && column < matrix->columns && line > -1 && column > -1 )
     {
+        
         Cell *cell = matrix->cells[line];
         
         while( cell )
@@ -158,16 +156,17 @@ int MatrixGetValue( Matrix *matrix , int line , int column )
         
     }
     
-    
-    
+
     return 0;
     
 }
 
 void DestroyMatrix( Matrix *matrix )
 {
+
     Cell *cell;
     Cell *aux;
+
     int i;
     
     for( i = 0 ; i < matrix->lines ; i++ )

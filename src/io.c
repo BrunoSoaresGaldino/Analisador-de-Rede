@@ -4,17 +4,15 @@ size_t GetFileSize(FILE *file)
 {
     size_t size = 0;
     
-    fseek(file,0L,SEEK_END);
+    fseek( file , 0L , SEEK_END );
     
     size = ftell(file);
     
-    fseek(file,0L,SEEK_SET);
+    fseek( file , 0L , SEEK_SET );
     
     return size;
     
 }
-
-
 
 json_t *LoadJsonFile(const char *file_name)
 {
@@ -51,7 +49,6 @@ json_t *LoadJsonFile(const char *file_name)
     
     if( !root )
     {
-        
         fprintf( stderr , "Erro na linha %d: %s", error.line , error.text );
         exit(EXIT_FAILURE);
     }

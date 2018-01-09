@@ -2,12 +2,13 @@
 #include "../include/actions.h"
 
 
-void RemoveNodeRandomly(Network *network)
+void RemoveNodeRandomly(Network *network )
 {
     
     if( !network->number_of_nodes )
+    {
         return;
-   
+    }
     
     int rand_number = rand() % ( network->number_of_nodes );
     
@@ -15,15 +16,13 @@ void RemoveNodeRandomly(Network *network)
     
 }
 
-
-
-void RemoveArcRandomly(Network *network)
+void RemoveArcRandomly(Network *network )
 {
     
     if( !network->number_of_arcs )
-        return;
-    
-    
+    {
+        return;   
+    }    
     
     int rand_number = rand() % ( network->number_of_arcs );
     
@@ -48,7 +47,7 @@ void RemoveN_NodesRandomly( Network * network , float n )
         
     }        
     
-    else if ( n > 0.0f && fabsf(n - network->number_of_nodes) <= DIFERENCE )// trata n como sendo a quantide de nos a serem removidos
+    else if ( n > 0.0f && fabsf( n - network->number_of_nodes ) <= DIFERENCE )// trata n como sendo a quantide de nos a serem removidos
     {
         
         nodes_to_remove = n;
@@ -60,7 +59,7 @@ void RemoveN_NodesRandomly( Network * network , float n )
     while( i < nodes_to_remove && network->number_of_nodes )
     {
         
-        rand_number = rand() %  network->number_of_nodes;
+        rand_number = rand( ) %  network->number_of_nodes;
         
         DestroyNode( network , rand_number );
         
@@ -72,7 +71,7 @@ void RemoveN_NodesRandomly( Network * network , float n )
 
 
 
-void RemoveN_ArcsRandomly(Network * network,float n)
+void RemoveN_ArcsRandomly( Network * network,float n )
 {
     
     int arcs_to_remove = 0;
@@ -93,7 +92,6 @@ void RemoveN_ArcsRandomly(Network * network,float n)
         arcs_to_remove = n;
         
     }
-    
     
     while( i < arcs_to_remove && network->number_of_arcs )
     {
@@ -161,34 +159,29 @@ void SaveStats(Network *network, const char *file_name,int percent)
     
     FILE *file = fopen(file_name,"a");
     
-    if( !file )
+    if( file )
     {
         
-        perror("Nao foi possivel abrir arquivo");
-        return;
+        int components = network->number_of_connected_components;
         
-    }
-    
-    int components = network->number_of_connected_components;
-    
-    float inverse_components;
-    
-    if( components )
-    {
-        inverse_components = 1/ ( ( float)components );
-    }
-    else 
-    {
-        inverse_components = 0;
-    }
-    
+        float inverse_components;
+        
+        if( components )
+        {
+            inverse_components = 1/ ( ( float)components );
+        }
+        else 
+        {
+            inverse_components = 0;
+        }
+        
 
-    if ( GetFileSize(file) == 0)
-    {
-        fprintf(file,"%%,     Nos,    Arcos,  Usinas,  Componentes,  Componentes ^ -1,   Maior Componente,   Nos desconectados,\n");
+        if ( !GetFileSize(file) )
+        {
+            fprintf(file,"%%,     Nos,    Arcos,  Usinas,  Componentes,  Componentes ^ -1,   Maior Componente,   Nos desconectados,\n");
 
-    }
-    
+        }
+        
         fprintf(
                 file,
                 "%3d,   %4d,   %4d,     %3d,     %4d,           %0.2f,               %4d,                %4d,\n",
@@ -201,17 +194,25 @@ void SaveStats(Network *network, const char *file_name,int percent)
                 network->greater_component_size,
                 NumberOfOffLineNodes(network)
                 );
+                
+                
+        fclose(file);
+        
+        return;
     
-    fclose(file);
+    }
+    
+    perror("Nao foi possivel abrir arquivo");
     
 }
 
 
 
-void MakeEnsemble(Network **network,int ensemble_from, int ensemble_to,int samples, const char *out_file)
+void MakeEnsemble( Network **network, int ensemble_from, int ensemble_to, int samples, const char *out_file )
 {
     float i;
-    int j = 0;
+    
+    int j;
     
     Network *copy = NULL;
     
@@ -221,13 +222,14 @@ void MakeEnsemble(Network **network,int ensemble_from, int ensemble_to,int sampl
         for( i = ensemble_from ; i <= ensemble_to ; i += 1 )
         {
         
-            DestroyNetwork(copy);
+            DestroyNetwork( copy );
             
-            copy = CopyNetwork(*network);
+            copy = CopyNetwork( *network );
             
             if( !copy )
             {
                 allegro_message("Nao foi possivel fazer o Ensembly estatistico");
+                
                 return;
             }
             
@@ -388,21 +390,6 @@ bool UserAction( Network **network , Network **copy , BITMAP *buffer )
         save_bitmap(file_name,buffer,NULL);
         
         key[KEY_P] = 0;
-    }
-    
-    if( key[KEY_S] )
-    {
-        
-        static int i = 1;
-        
-        char file_name[50];
-        
-        sprintf(file_name,"../data/stats%05d.csv",i++);
-        
-        SaveStats(*network,file_name,0.0);
-        
-        key[KEY_S] = 0;
-        
     }
     
     if(key[KEY_ESC])
