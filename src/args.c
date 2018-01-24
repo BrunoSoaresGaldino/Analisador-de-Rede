@@ -5,19 +5,22 @@ void ParseArgs(int argc, char *argv[],ToDo *to_do)
 {
     int i;
     
-    memset( &to_do , 0 , sizeof( to_do) );
-    
     strcpy(to_do->output_file,"../data/ensemble.csv");
+    strcpy(to_do->network_file,"../data/data.json");
+    
     to_do->display = true;
     to_do->samples = 1;
    
+    
     if( argc < 2 )
     {    
         return;
     }
     
+    
     for( i = 0 ; i < argc ; i++)
     {
+        
         if( !strcmp(argv[i],DELETE))
         {
             if( !strcmp(argv[i+1],ARCS) )
@@ -71,7 +74,7 @@ void ParseArgs(int argc, char *argv[],ToDo *to_do)
             
             if( i < argc )
             {
-                strcpy(to_do->output_file, argv[i] );
+                strncpy(to_do->output_file, argv[i],MAX_FILE_NAME_SIZE );
             }
             
         }
@@ -82,7 +85,7 @@ void ParseArgs(int argc, char *argv[],ToDo *to_do)
             
             if( i < argc )
             {
-                strcpy(to_do->network_file,argv[i] );
+                strncpy(to_do->network_file,argv[i],MAX_FILE_NAME_SIZE );
             }
         }
         else if( !strcmp(argv[i],SAMPLES) )

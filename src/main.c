@@ -13,25 +13,27 @@ int main(int argc ,char** argv)
     
     srand( (unsigned)time(NULL) );
     
+
+    
     bool exit_program = false;
-    
-    ToDo to_do;
-    
-    int number_of_nodes = 0 ,number_of_arcs = 0;
-    
-    ParseArgs(argc,argv, &to_do );
-    
+
+
     Network *net = CreateNetwork( );
     Network *copy = NULL;
+
+    int number_of_nodes = 0 ,number_of_arcs = 0;
+   
+    ToDo to_do;
     
+    
+    ParseArgs(argc,argv, &to_do );
+
     json_t *root = LoadJsonFile(to_do.network_file);
     
     CreateNodes(net,root);
     CreateArcs(net,root);
     
     json_decref(root);
-    
-    
     
 //*********************************************************    
     allegro_init();
