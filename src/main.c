@@ -7,17 +7,19 @@
 
 #include "../include/network_analyzer.h"
 
+bool exit_program = false;
+
+void ExitProgram( void )
+{
+    exit_program = true;
+}
+END_OF_FUNCTION(ExitProgram);
 
 int main(int argc ,char** argv)
 {
     
     srand( (unsigned)time(NULL) );
-    
-
-    
-    bool exit_program = false;
-
-
+   
     Network *net = CreateNetwork( );
     Network *copy = NULL;
 
@@ -42,6 +44,11 @@ int main(int argc ,char** argv)
     install_mouse();
     
     set_color_depth( 32 );
+    
+    LOCK_FUNCTION(ExitProgram);
+    LOCK_VARIABLE(exit_program);
+    
+    set_close_button_callback(ExitProgram);
     
     if ( set_gfx_mode(GFX_AUTODETECT_WINDOWED,SCREEN_WIDTH,SCREEN_HEIGHT,0,0) )
     {
